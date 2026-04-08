@@ -43,6 +43,12 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+            <li *ngFor="let item of entitiesNavbarItems">
+              <a class="dropdown-item" [routerLink]="item.route" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>{{ item.name }}</span>
+              </a>
+            </li>
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
           </ul>
         </li>

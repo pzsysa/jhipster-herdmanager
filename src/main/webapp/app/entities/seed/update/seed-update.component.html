@@ -1,0 +1,158 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-seed-heading" data-cy="SeedCreateUpdateHeading">
+        <span *ngIf="editForm.get('id')!.value">Edit Seed</span>
+        <span *ngIf="!editForm.get('id')!.value">Create a Seed</span>
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" [hidden]="!editForm.get('id')!.value">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" id="field_id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="field_name"
+            name="name"
+            data-cy="name"
+            formControlName="name"
+            maxlength="100"
+            required
+          />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')!.errors?.['required']">This field is required.</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('name')!.errors?.['maxlength']"
+              >This field cannot be longer than 100 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cropType">Crop Type</label>
+          <select class="form-select" id="field_cropType" data-cy="cropType" name="cropType" formControlName="cropType" required>
+            <option value="" disabled>[None]</option>
+            <option *ngFor="let cropTypeOption of cropTypeValues" [value]="cropTypeOption">{{ cropTypeOption }}</option>
+          </select>
+          <div *ngIf="editForm.get('cropType')!.invalid && (editForm.get('cropType')!.dirty || editForm.get('cropType')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cropType')!.errors?.['required']">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_region">Region</label>
+          <input
+            type="text"
+            class="form-control"
+            id="field_region"
+            name="region"
+            data-cy="region"
+            formControlName="region"
+            maxlength="100"
+            required
+          />
+          <div *ngIf="editForm.get('region')!.invalid && (editForm.get('region')!.dirty || editForm.get('region')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('region')!.errors?.['required']">This field is required.</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('region')!.errors?.['maxlength']"
+              >This field cannot be longer than 100 characters.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rainfallPattern">Rainfall Pattern</label>
+          <select
+            class="form-select"
+            id="field_rainfallPattern"
+            data-cy="rainfallPattern"
+            name="rainfallPattern"
+            formControlName="rainfallPattern"
+            required
+          >
+            <option value="" disabled>[None]</option>
+            <option *ngFor="let rainfallPatternOption of rainfallPatternValues" [value]="rainfallPatternOption">
+              {{ rainfallPatternOption }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('rainfallPattern')!.invalid &&
+              (editForm.get('rainfallPattern')!.dirty || editForm.get('rainfallPattern')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('rainfallPattern')!.errors?.['required']"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_waterRequirementMmToEstablish">Water Requirement (mm) to Establish</label>
+          <input
+            type="number"
+            class="form-control"
+            id="field_waterRequirementMmToEstablish"
+            name="waterRequirementMmToEstablish"
+            data-cy="waterRequirementMmToEstablish"
+            formControlName="waterRequirementMmToEstablish"
+            min="0"
+            required
+          />
+          <div
+            *ngIf="
+              editForm.get('waterRequirementMmToEstablish')!.invalid &&
+              (editForm.get('waterRequirementMmToEstablish')!.dirty || editForm.get('waterRequirementMmToEstablish')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('waterRequirementMmToEstablish')!.errors?.['required']"
+              >This field is required.</small
+            >
+            <small class="form-text text-danger" *ngIf="editForm.get('waterRequirementMmToEstablish')!.errors?.['min']"
+              >This field should be at least 0.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_notes">Notes</label>
+          <textarea
+            class="form-control"
+            id="field_notes"
+            name="notes"
+            data-cy="notes"
+            formControlName="notes"
+            maxlength="500"
+            rows="3"
+          ></textarea>
+          <div *ngIf="editForm.get('notes')!.invalid && (editForm.get('notes')!.dirty || editForm.get('notes')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('notes')!.errors?.['maxlength']"
+              >This field cannot be longer than 500 characters.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
