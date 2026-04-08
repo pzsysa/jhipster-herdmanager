@@ -1,0 +1,3 @@
+id;name;crop_type;region;rainfall_pattern;water_requirement_mm_to_establish;notes
+1;Barley;BARLEY;Overberg;WINTER;25;Barley requires approximately 25mm of rainfall or irrigation at seeding to ensure good germination and establishment. Plant April-June in the Overberg winter rainfall region. Soil moisture should reach 30cm depth.
+2;Oats;OATS;Overberg;WINTER;30;Oats require approximately 30mm of rainfall or irrigation at seeding to ensure good germination and establishment. Plant April-June in the Overberg winter rainfall region. Oats are slightly more water demanding than barley at establishment.

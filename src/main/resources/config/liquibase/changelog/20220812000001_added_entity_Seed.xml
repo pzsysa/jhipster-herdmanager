@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Seed.
+    -->
+    <changeSet id="20220812000001-1" author="jhipster">
+        <createTable tableName="seed">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="crop_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="region" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="rainfall_pattern" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="water_requirement_mm_to_establish" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="notes" type="varchar(500)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20220812000001-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/seed.csv"
+                  separator=";"
+                  tableName="seed"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="crop_type" type="string"/>
+            <column name="region" type="string"/>
+            <column name="rainfall_pattern" type="string"/>
+            <column name="water_requirement_mm_to_establish" type="numeric"/>
+            <column name="notes" type="string"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

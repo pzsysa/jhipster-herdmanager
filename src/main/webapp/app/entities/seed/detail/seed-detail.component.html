@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="seed">
+      <h2 data-cy="seedDetailsHeading"><span>Seed</span> {{ seed.id }}</h2>
+
+      <dl class="row">
+        <dt class="text-end col-sm-4">ID</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.id }}</span>
+        </dd>
+
+        <dt class="text-end col-sm-4">Name</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.name }}</span>
+        </dd>
+
+        <dt class="text-end col-sm-4">Crop Type</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.cropType }}</span>
+        </dd>
+
+        <dt class="text-end col-sm-4">Region</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.region }}</span>
+        </dd>
+
+        <dt class="text-end col-sm-4">Rainfall Pattern</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.rainfallPattern }}</span>
+        </dd>
+
+        <dt class="text-end col-sm-4">Water Requirement (mm) to Establish</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.waterRequirementMmToEstablish }}</span>
+        </dd>
+
+        <dt class="text-end col-sm-4">Notes</dt>
+        <dd class="col-sm-8">
+          <span>{{ seed.notes }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <a [routerLink]="['/seed', seed.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </a>
+    </div>
+  </div>
+</div>
